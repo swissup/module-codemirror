@@ -1,4 +1,5 @@
 define([
+    'jquery',
     'underscore',
     'Magento_Ui/js/form/element/textarea',
     '../../codemirror/lib/codemirror',
@@ -11,7 +12,7 @@ define([
     '../../codemirror/addon/edit/closetag',
     '../../codemirror/addon/edit/matchbrackets',
     '../../codemirror/addon/edit/matchtags'
-], function (_, Textarea, CodeMirror) {
+], function ($, _, Textarea, CodeMirror) {
     'use strict';
 
     function loadCss(url) {
@@ -73,6 +74,8 @@ define([
          */
         listenEditorChanges: function (editor) {
             this.value(editor.getValue());
+            // Force update in other binded KO veiw models.
+            $(this.editor.getTextArea()).trigger('change');
         },
 
         /**
@@ -84,6 +87,24 @@ define([
             ) {
                 this.editor.setValue(newValue);
             }
+        },
+
+        /**
+         * {@inheritdoc}
+         */
+        initConfig: function () {
+            this._super();
+
+            // Force uid when input id is set in element config.
+            if (this.inputId) {
+                _.extend(this, {
+                    uid: this.inputId,
+                    noticeId: 'notice-' + this.inputId,
+                    errorId: 'error-' + this.inputId
+                });
+            }
+
+            return this;
         }
     });
 });
