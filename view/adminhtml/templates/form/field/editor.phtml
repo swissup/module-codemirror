@@ -1,0 +1,17 @@
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": <?= $block->getJsLayout() ?>,
+        "Swissup_Codemirror/js/toggleCodeMirror": {}
+    }
+}
+</script>
+<div class="admin__field-control control">
+<!-- ko scope: '<?= $block->getScope() ?>' -->
+    <!-- ko foreach: { data: elems, as: 'element' } -->
+        <!-- ko if: hasTemplate() -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+<!-- /ko -->
+</div>
