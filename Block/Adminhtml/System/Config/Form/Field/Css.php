@@ -52,6 +52,7 @@ class Css extends Field
                                 'visible' => true,
                                 'formElement' => 'textarea',
                                 'labelVisible' => false,
+                                'inputId' => $element->getHtmlId(),
                                 'editorConfig' => [
                                     'mode' => $this->getMode(),
                                     'readOnly' => $isDisabled ? 'nocursor' : false,
