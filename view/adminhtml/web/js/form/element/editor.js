@@ -3,8 +3,6 @@ define([
     'underscore',
     'Magento_Ui/js/form/element/textarea',
     '../../codemirror/lib/codemirror',
-    '../../codemirror/mode/css/css',
-    '../../codemirror/mode/htmlmixed/htmlmixed',
     '../../codemirror/addon/hint/show-hint',
     '../../codemirror/addon/hint/css-hint',
     '../../codemirror/addon/hint/html-hint',
@@ -15,6 +13,19 @@ define([
 ], function ($, _, Textarea, CodeMirror) {
     'use strict';
 
+    var resourceMap = {
+        'css': 'css/css',
+        'htmlmixed': 'htmlmixed/htmlmixed',
+        'javascript': 'javascript/javascript',
+        'text/x-less': 'css/css',
+        'text/css': 'css/css'
+    };
+
+    /**
+     * Load Css via related URL
+     *
+     * @param  {String} url
+     */
     function loadCss(url) {
         var link = document.createElement('link');
 
@@ -65,8 +76,16 @@ define([
          * @param  {Element} textarea
          */
         initEditor: function (textarea) {
-            this.editor = CodeMirror.fromTextArea(textarea, this.editorConfig);
-            this.editor.on('changes', this.listenEditorChanges.bind(this));
+            var self = this,
+                mode = this.editorConfig.mode;
+
+            // Require resource with repective mode. Init editor when ready.
+            require([
+                'Swissup_Codemirror/js/codemirror/mode/' + resourceMap[mode]
+            ], function () {
+                self.editor = CodeMirror.fromTextArea(textarea, self.editorConfig);
+                self.editor.on('changes', self.listenEditorChanges.bind(self));
+            });
         },
 
         /**
