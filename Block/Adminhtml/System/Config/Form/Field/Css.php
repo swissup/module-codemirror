@@ -70,7 +70,7 @@ class Css extends Field
     /**
      * Get editor mode.
      *
-     * @return string
+     * @return string|array
      */
     public function getMode()
     {
