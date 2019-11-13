@@ -77,11 +77,13 @@ define([
          */
         initEditor: function (textarea) {
             var self = this,
-                mode = this.editorConfig.mode;
+                mode = this.editorConfig.mode,
+                modeName;
 
             // Require resource with repective mode. Init editor when ready.
+            modeName = typeof mode === 'object' ? mode.name : mode;
             require([
-                'Swissup_Codemirror/js/codemirror/mode/' + resourceMap[mode]
+                'Swissup_Codemirror/js/codemirror/mode/' + resourceMap[modeName]
             ], function () {
                 self.editor = CodeMirror.fromTextArea(textarea, self.editorConfig);
                 self.editor.on('changes', self.listenEditorChanges.bind(self));
@@ -93,8 +95,6 @@ define([
          */
         listenEditorChanges: function (editor) {
             this.value(editor.getValue());
-            // Force update in other binded KO veiw models.
-            $(this.editor.getTextArea()).trigger('change');
         },
 
         /**
@@ -102,7 +102,7 @@ define([
          */
         setEditorValue: function (newValue) {
             if (typeof this.editor !== 'undefined' &&
-                this.value() !== this.editor.getValue()
+                newValue !== this.editor.getValue()
             ) {
                 this.editor.setValue(newValue);
             }
