@@ -9,6 +9,6 @@ class Less extends Css
      */
     public function getMode()
     {
-        return 'javascript';
+        return 'text/x-less';
     }
 }
