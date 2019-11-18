@@ -2,24 +2,55 @@ define([
     'jquery',
     'underscore',
     'Magento_Ui/js/form/element/textarea',
-    '../../codemirror/lib/codemirror',
-    '../../codemirror/addon/hint/show-hint',
-    '../../codemirror/addon/hint/css-hint',
-    '../../codemirror/addon/hint/html-hint',
-    '../../codemirror/addon/edit/closebrackets',
-    '../../codemirror/addon/edit/closetag',
-    '../../codemirror/addon/edit/matchbrackets',
-    '../../codemirror/addon/edit/matchtags'
+    '../../codemirror/lib/codemirror'
 ], function ($, _, Textarea, CodeMirror) {
     'use strict';
 
-    var resourceMap = {
-        'css': 'css/css',
-        'htmlmixed': 'htmlmixed/htmlmixed',
-        'javascript': 'javascript/javascript',
-        'text/x-less': 'css/css',
-        'text/css': 'css/css'
-    };
+    /**
+     * Get array of required resources for CodeMirror mode.
+     *
+     * @param  {String} modeName
+     * @return {Array}
+     */
+    function getRequired(modeName) {
+        var resourceMap = {
+            'css': [
+                'addon/hint/show-hint',
+                'addon/hint/css-hint',
+                'addon/edit/closebrackets',
+                'addon/edit/matchbrackets',
+                'mode/css/css'
+            ],
+            'htmlmixed': [
+                'addon/hint/show-hint',
+                'addon/hint/css-hint',
+                'addon/hint/html-hint',
+                'addon/edit/closetag',
+                'addon/edit/matchtags',
+                'addon/edit/closebrackets',
+                'addon/edit/matchbrackets',
+                'mode/htmlmixed/htmlmixed'
+            ],
+            'javascript': [
+                'addon/edit/closebrackets',
+                'addon/edit/matchbrackets',
+                'mode/javascript/javascript'
+            ],
+            'text/x-less': [
+                'addon/hint/show-hint',
+                'addon/hint/css-hint',
+                'addon/edit/closebrackets',
+                'addon/edit/matchbrackets',
+                'mode/css/css'
+            ]
+        };
+
+        return typeof resourceMap[modeName] === 'undefined' ?
+            [] :
+            $.map(resourceMap[modeName], function (path) {
+                return 'Swissup_Codemirror/js/codemirror/' + path;
+            });
+    }
 
     /**
      * Load Css via related URL
@@ -82,12 +113,19 @@ define([
 
             // Require resource with repective mode. Init editor when ready.
             modeName = typeof mode === 'object' ? mode.name : mode;
-            require([
-                'Swissup_Codemirror/js/codemirror/mode/' + resourceMap[modeName]
-            ], function () {
-                self.editor = CodeMirror.fromTextArea(textarea, self.editorConfig);
-                self.editor.on('changes', self.listenEditorChanges.bind(self));
-            });
+            require(
+                getRequired(modeName), // Array of required resources
+                function () {
+                    self.editor = CodeMirror.fromTextArea(
+                        textarea,
+                        self.editorConfig
+                    );
+                    self.editor.on(
+                        'changes',
+                        self.listenEditorChanges.bind(self)
+                    );
+                }
+            );
         },
 
         /**
