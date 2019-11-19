@@ -11,12 +11,11 @@ Current version of module has implementations for Magento Admin only:
 ### Installation
 
 ```bash
-cd <magento_root>
 composer require swissup/module-codemirror
 bin/magento setup:upgrade
 ```
 
-### Usege
+### Usage
 
 #### UI Component
 
