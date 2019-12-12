@@ -53,12 +53,31 @@ define([
     }
 
     /**
+     * Is CSS minification enabled
+     *
+     * @param  {String}  minficationPostfix
+     * @return {Boolean}
+     */
+    function isMinificationEnabled(minficationPostfix) {
+        var baseUrl = window.location.origin,
+            href;
+
+        href = $('link[type="text/css"][href^="' + baseUrl + '"]').attr('href');
+
+        return href.indexOf(minficationPostfix) > 0;
+    }
+
+    /**
      * Load Css via related URL
      *
      * @param  {String} url
      */
     function loadCss(url) {
         var link = document.createElement('link');
+
+        if (isMinificationEnabled('.min.css')) {
+            url = url.replace('.css', '.min.css');
+        }
 
         link.type = 'text/css';
         link.rel = 'stylesheet';
