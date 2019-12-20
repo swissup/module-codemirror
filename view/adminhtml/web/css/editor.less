@@ -10,4 +10,27 @@
     textarea[disabled] + & {
         opacity: .5;
     }
+
+    .ui-resizable-s {
+        bottom: 0;
+        display: block;
+        opacity: 0;
+        transition: opacity .2s ease-in-out;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &::before {
+            display: block;
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 20%;
+            left: 40%;
+            height: 3px;
+            border: solid #adadad;
+            border-width: 1px 0;
+        }
+    }
 }

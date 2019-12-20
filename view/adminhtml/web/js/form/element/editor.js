@@ -53,6 +53,26 @@ define([
     }
 
     /**
+     * Make editor resizable.
+     *
+     * @param  {CodeMirror} editor
+     */
+    function makeResizable(editor) {
+        var wrapperElement = editor.getWrapperElement();
+
+        $(wrapperElement).resizable({
+            handles: 's',
+            resize: _.debounce(editor.refresh.bind(editor), 100)
+        });
+        // Make full height on double click.
+        $('.ui-resizable-handle', wrapperElement)
+            .dblclick(function () {
+                editor.setSize(null, editor.doc.height + 12);
+                editor.refresh();
+            });
+    }
+
+    /**
      * Is CSS minification enabled
      *
      * @param  {String}  minficationPostfix
@@ -143,6 +163,7 @@ define([
                         'changes',
                         self.listenEditorChanges.bind(self)
                     );
+                    makeResizable(self.editor);
                 }
             );
         },
