@@ -80,11 +80,17 @@ define([
      */
     function isMinificationEnabled(minficationPostfix) {
         var baseUrl = window.location.origin,
-            href;
+            isEnabled = true;
 
-        href = $('link[type="text/css"][href^="' + baseUrl + '"]').attr('href');
+        $('link[type="text/css"][href^="' + baseUrl + '"]').each(function () {
+            if ($(this).attr('href').indexOf(minficationPostfix) < 0) {
+                isEnabled = false;
 
-        return href.indexOf(minficationPostfix) > 0;
+                return false;
+            }
+        });
+
+        return isEnabled;
     }
 
     /**
