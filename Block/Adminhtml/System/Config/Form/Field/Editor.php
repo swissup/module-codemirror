@@ -5,7 +5,7 @@ namespace Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class Css extends Field
+class Editor extends Field
 {
     /**
      * @var string
@@ -54,7 +54,7 @@ class Css extends Field
                                 'labelVisible' => false,
                                 'inputId' => $element->getHtmlId(),
                                 'editorConfig' => [
-                                    'mode' => $this->getMode(),
+                                    'mode' => $this->getEditorMode(),
                                     'readOnly' => $isDisabled ? 'nocursor' : false,
                                     'lineWrapping' => true
                                 ]
@@ -65,15 +65,5 @@ class Css extends Field
                 ]
             ]
         ];
-    }
-
-    /**
-     * Get editor mode.
-     *
-     * @return string|array
-     */
-    public function getMode()
-    {
-        return 'css';
     }
 }

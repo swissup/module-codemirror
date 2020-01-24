@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Css" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="editor_mode" xsi:type="string">css</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Less" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="editor_mode" xsi:type="string">text/x-less</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Inlinecss" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="editor_mode" xsi:type="array">
+                    <item name="name" xsi:type="string">css</item>
+                    <item name="inline" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Htmlmixed" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="editor_mode" xsi:type="string">htmlmixed</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Javascript" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="editor_mode" xsi:type="string">javascript</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Json" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="editor_mode" xsi:type="array">
+                    <item name="name" xsi:type="string">javascript</item>
+                    <item name="json" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>
