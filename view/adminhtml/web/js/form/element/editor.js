@@ -13,8 +13,9 @@ define([
      * @return {Array}
      */
     function getRequired(modeName) {
-        var resourceMap = {
-            'css': [
+        var files,
+            resourceMap = {
+            'css|text/x-less': [
                 'addon/hint/show-hint',
                 'addon/hint/css-hint',
                 'addon/edit/closebrackets',
@@ -35,19 +36,16 @@ define([
                 'addon/edit/closebrackets',
                 'addon/edit/matchbrackets',
                 'mode/javascript/javascript'
-            ],
-            'text/x-less': [
-                'addon/hint/show-hint',
-                'addon/hint/css-hint',
-                'addon/edit/closebrackets',
-                'addon/edit/matchbrackets',
-                'mode/css/css'
             ]
         };
 
-        return typeof resourceMap[modeName] === 'undefined' ?
+        files = _.find(resourceMap, function (value, key) {
+            return key.indexOf(modeName) >= 0;
+        });
+
+        return typeof files === 'undefined' ?
             [] :
-            $.map(resourceMap[modeName], function (path) {
+            _.map(files, function (path) {
                 return 'Swissup_Codemirror/js/codemirror/' + path;
             });
     }
