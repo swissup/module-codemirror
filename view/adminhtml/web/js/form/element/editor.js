@@ -77,10 +77,9 @@ define([
      * @return {Boolean}
      */
     function isMinificationEnabled(minficationPostfix) {
-        var baseUrl = window.location.origin,
-            isEnabled = true;
+        var isEnabled = true;
 
-        $('link[type="text/css"][href^="' + baseUrl + '"]').each(function () {
+        $('link[type="text/css"][href^="' + require.toUrl('') + '"]').each(function () {
             if ($(this).attr('href').indexOf(minficationPostfix) < 0) {
                 isEnabled = false;
 
