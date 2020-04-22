@@ -6,6 +6,8 @@ define([
 ], function ($, _, Textarea, CodeMirror) {
     'use strict';
 
+    var _isMinificationEnabled;
+
     /**
      * Get array of required resources for CodeMirror mode.
      *
@@ -77,17 +79,22 @@ define([
      * @return {Boolean}
      */
     function isMinificationEnabled(minficationPostfix) {
-        var isEnabled = true;
+        var url;
 
-        $('link[type="text/css"][href^="' + require.toUrl('') + '"]').each(function () {
-            if ($(this).attr('href').indexOf(minficationPostfix) < 0) {
-                isEnabled = false;
+        if (typeof _isMinificationEnabled === 'undefined') {
+            url = document.createElement('a');
+            url.href = require.toUrl('');
+            _isMinificationEnabled = true;
+            $('link[type="text/css"][href^="' + url.origin + '"]').each(function () {
+                if ($(this).attr('href').indexOf(minficationPostfix) < 0) {
+                    _isMinificationEnabled = false;
 
-                return false;
-            }
-        });
+                    return false;
+                }
+            });
+        }
 
-        return isEnabled;
+        return _isMinificationEnabled;
     }
 
     /**
