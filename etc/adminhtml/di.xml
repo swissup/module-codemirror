@@ -5,23 +5,32 @@
     <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Css" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
         <arguments>
             <argument name="data" xsi:type="array">
-                <item name="editor_mode" xsi:type="string">css</item>
+                <item name="editor_config" xsi:type="array">
+                    <item name="mode" xsi:type="string">css</item>
+                    <item name="line_wrapping" xsi:type="boolean">true</item>
+                </item>
             </argument>
         </arguments>
     </virtualType>
     <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Less" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
         <arguments>
             <argument name="data" xsi:type="array">
-                <item name="editor_mode" xsi:type="string">text/x-less</item>
+                <item name="editor_config" xsi:type="array">
+                    <item name="mode" xsi:type="string">text/x-less</item>
+                    <item name="line_wrapping" xsi:type="boolean">true</item>
+                </item>
             </argument>
         </arguments>
     </virtualType>
     <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Inlinecss" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
         <arguments>
             <argument name="data" xsi:type="array">
-                <item name="editor_mode" xsi:type="array">
-                    <item name="name" xsi:type="string">css</item>
-                    <item name="inline" xsi:type="boolean">true</item>
+                <item name="editor_config" xsi:type="array">
+                    <item name="mode" xsi:type="array">
+                        <item name="name" xsi:type="string">css</item>
+                        <item name="inline" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="line_wrapping" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </arguments>
@@ -30,7 +39,10 @@
     <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Htmlmixed" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
         <arguments>
             <argument name="data" xsi:type="array">
-                <item name="editor_mode" xsi:type="string">htmlmixed</item>
+                <item name="editor_config" xsi:type="array">
+                    <item name="mode" xsi:type="string">htmlmixed</item>
+                    <item name="line_wrapping" xsi:type="boolean">true</item>
+                </item>
             </argument>
         </arguments>
     </virtualType>
@@ -38,14 +50,20 @@
     <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Javascript" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
         <arguments>
             <argument name="data" xsi:type="array">
-                <item name="editor_mode" xsi:type="string">javascript</item>
+                <item name="editor_config" xsi:type="array">
+                    <item name="mode" xsi:type="string">javascript</item>
+                    <item name="line_wrapping" xsi:type="boolean">true</item>
+                </item>
             </argument>
         </arguments>
     </virtualType>
     <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Json" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
         <arguments>
             <argument name="data" xsi:type="array">
-                <item name="editor_mode" xsi:type="string">application/ld+json</item>
+                <item name="editor_config" xsi:type="array">
+                    <item name="mode" xsi:type="string">application/ld+json</item>
+                    <item name="line_wrapping" xsi:type="boolean">true</item>
+                </item>
             </argument>
         </arguments>
     </virtualType>

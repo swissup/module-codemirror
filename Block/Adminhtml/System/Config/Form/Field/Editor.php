@@ -54,9 +54,9 @@ class Editor extends Field
                                 'labelVisible' => false,
                                 'inputId' => $element->getHtmlId(),
                                 'editorConfig' => [
-                                    'mode' => $this->getEditorMode(),
+                                    'mode' => $this->getMode(),
                                     'readOnly' => $isDisabled ? 'nocursor' : false,
-                                    'lineWrapping' => true
+                                    'lineWrapping' => $this->isLineWrapping()
                                 ]
                             ]
                         ]
@@ -65,5 +65,23 @@ class Editor extends Field
                 ]
             ]
         ];
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isLineWrapping()
+    {
+        return !!$this->getData('editor_config/line_wrapping');
+    }
+
+    /**
+     * Get edito mode name
+     *
+     * @return string|array
+     */
+    public function getMode()
+    {
+        return $this->getData('editor_config/mode');
     }
 }
