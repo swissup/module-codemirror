@@ -61,7 +61,7 @@ define([
         var wrapperElement = editor.getWrapperElement();
 
         $(wrapperElement).resizable({
-            handles: 's',
+            handles: 'se',
             resize: _.debounce(editor.refresh.bind(editor), 100)
         });
         // Make full height on double click.

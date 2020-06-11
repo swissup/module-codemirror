@@ -12,26 +12,25 @@
         opacity: .5;
     }
 
-    .ui-resizable-s {
-        bottom: 0;
-        display: block;
-        opacity: 0;
-        transition: opacity .2s ease-in-out;
+    .ui-resizable-se {
+        bottom: 1px;
+        right: 1px;
+        width: 15px;
+        height: 15px;
+        overflow: hidden;
 
-        &:hover {
-            opacity: 1;
-        }
-
-        &::before {
-            display: block;
+        &:before {
             content: '';
             position: absolute;
-            top: 0;
-            width: 20%;
-            left: 40%;
-            height: 3px;
-            border: solid #adadad;
-            border-width: 1px 0;
+            top: 50%;
+            left: 0;
+            width: 150%;
+            height: 1px;
+            transform: rotate(-45deg);
+            opacity: .5;
+            background: #000;
+            box-shadow: 0 3px #000,
+                        0 6px #000;
         }
     }
 }
