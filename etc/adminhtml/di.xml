@@ -45,10 +45,7 @@
     <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Json" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
         <arguments>
             <argument name="data" xsi:type="array">
-                <item name="editor_mode" xsi:type="array">
-                    <item name="name" xsi:type="string">javascript</item>
-                    <item name="json" xsi:type="boolean">true</item>
-                </item>
+                <item name="editor_mode" xsi:type="string">application/ld+json</item>
             </argument>
         </arguments>
     </virtualType>

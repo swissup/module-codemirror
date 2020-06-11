@@ -34,7 +34,7 @@ define([
                 'addon/edit/matchbrackets',
                 'mode/htmlmixed/htmlmixed'
             ],
-            'javascript': [
+            'javascript|application/ld+json': [
                 'addon/edit/closebrackets',
                 'addon/edit/matchbrackets',
                 'mode/javascript/javascript'
