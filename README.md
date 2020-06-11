@@ -109,3 +109,4 @@ There are 5 frontend model for system config:
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Javascript**
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Htmlmixed**
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Inlinecss**
+ -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Json**
