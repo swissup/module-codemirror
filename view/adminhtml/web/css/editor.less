@@ -36,9 +36,27 @@
         }
     }
 
+    .mage-error ~ & {
+        margin-top: 7px;
+    }
+
     .cm-break-word & {
         pre {
             word-break: break-word;
         }
     }
+}
+
+.cm-textarea-hidden {
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    opacity: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    resize: none !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
 }

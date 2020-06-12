@@ -100,14 +100,23 @@ define([
     /**
      * @param {Node} textarea
      */
-    function refreshEditorOnTextareaVisibility(textarea) {
+    function listenTextareaVisibilityChange(textarea) {
         var observer = new MutationObserver(function () {
-            if (!$(textarea).is(':visible')) {
-                return;
+            var td;
+
+            if ($(textarea).closest('.section-config')) {
+                td = $(textarea).closest('tr').find('td');
+
+                if (textarea.style.display === 'none') {
+                    td.addClass('ignore-validate');
+                } else {
+                    td.removeClass('ignore-validate');
+                }
             }
 
-            $(textarea).next('.CodeMirror').get(0).CodeMirror.refresh();
-            $(textarea).hide();
+            if (textarea.style.display !== 'none') {
+                $(textarea).siblings('.CodeMirror').get(0).CodeMirror.refresh();
+            }
         });
 
         observer.observe(textarea, {
@@ -183,13 +192,21 @@ define([
             require(
                 getRequired(modeName), // Array of required resources
                 function () {
-                    // fix for hidden config field when using `depends`
-                    refreshEditorOnTextareaVisibility(textarea);
+                    var visible = textarea.style.display !== 'none';
+
+                    if ($('textarea').closest('tr').css('display') === 'none') {
+                        visible = false;
+                    }
 
                     self.editor = CodeMirror.fromTextArea(
                         textarea,
                         self.editorConfig
                     );
+
+                    listenTextareaVisibilityChange(textarea);
+                    // fix for hidden config field when using `depends`
+                    $(textarea).addClass('cm-textarea-hidden').toggle(visible);
+
                     self.editor.on(
                         'changes',
                         self.listenEditorChanges.bind(self)

@@ -53,6 +53,7 @@ class Editor extends Field
                                 'formElement' => 'textarea',
                                 'labelVisible' => false,
                                 'inputId' => $element->getHtmlId(),
+                                'inputClass' => $this->getElement()->getClass(),
                                 'additionalClasses' => $this->getData('editor_config/css_class'),
                                 'editorConfig' => [
                                     'mode' => $this->getMode(),
