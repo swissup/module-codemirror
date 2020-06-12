@@ -98,6 +98,24 @@ define([
     }
 
     /**
+     * @param {Node} textarea
+     */
+    function refreshEditorOnTextareaVisibility(textarea) {
+        var observer = new MutationObserver(function () {
+            if (!$(textarea).is(':visible')) {
+                return;
+            }
+
+            $(textarea).next('.CodeMirror').get(0).CodeMirror.refresh();
+            $(textarea).hide();
+        });
+
+        observer.observe(textarea, {
+            attributes: true
+        });
+    }
+
+    /**
      * Load Css via related URL
      *
      * @param  {String} url
@@ -165,6 +183,9 @@ define([
             require(
                 getRequired(modeName), // Array of required resources
                 function () {
+                    // fix for hidden config field when using `depends`
+                    refreshEditorOnTextareaVisibility(textarea);
+
                     self.editor = CodeMirror.fromTextArea(
                         textarea,
                         self.editorConfig
