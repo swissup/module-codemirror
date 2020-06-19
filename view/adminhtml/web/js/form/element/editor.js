@@ -62,7 +62,8 @@ define([
 
         $(wrapperElement).resizable({
             handles: 's',
-            resize: _.debounce(editor.refresh.bind(editor), 100)
+            resize: _.debounce(editor.refresh.bind(editor), 100),
+            zIndex: 900
         });
         // Make full height on double click.
         $('.ui-resizable-handle', wrapperElement)
