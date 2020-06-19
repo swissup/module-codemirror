@@ -153,6 +153,7 @@ define([
     return Textarea.extend({
         defaults: {
             elementTmpl: 'Swissup_Codemirror/form/element/editor',
+            inputClass: '',
             editorConfig: {
                 indentUnit: 4,
                 lineNumbers: true,
