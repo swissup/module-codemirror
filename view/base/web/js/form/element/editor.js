@@ -222,8 +222,11 @@ define([
                     );
 
                     listenTextareaVisibilityChange(textarea);
-                    // fix for hidden config field when using `depends`
-                    $(textarea).addClass('cm-textarea-hidden').toggle(visible);
+
+                    $(textarea)
+                        .attr('tabindex', -1) // prevent focus on invisible field
+                        .addClass('cm-textarea-hidden') // fix for hidden config field when using `depends`
+                        .toggle(visible);
 
                     self.editor.on(
                         'changes',
