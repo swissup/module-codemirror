@@ -102,27 +102,41 @@ define([
      * @param {Node} textarea
      */
     function listenTextareaVisibilityChange(textarea) {
-        var observer = new MutationObserver(function () {
-            var td;
+        var uiField = $(textarea).closest('.field, .admin__field').get(0),
+            uiObserver,
+            configObserver = new MutationObserver(function () {
+                var td;
 
-            if ($(textarea).closest('.section-config')) {
-                td = $(textarea).closest('tr').find('td');
+                if ($(textarea).closest('.section-config')) {
+                    td = $(textarea).closest('tr').find('td');
 
-                if (textarea.style.display === 'none') {
-                    td.addClass('ignore-validate');
-                } else {
-                    td.removeClass('ignore-validate');
+                    if (textarea.style.display === 'none') {
+                        td.addClass('ignore-validate');
+                    } else {
+                        td.removeClass('ignore-validate');
+                    }
                 }
-            }
 
-            if (textarea.style.display !== 'none') {
-                $(textarea).siblings('.CodeMirror').get(0).CodeMirror.refresh();
-            }
-        });
+                if (textarea.style.display !== 'none') {
+                    $(textarea).siblings('.CodeMirror').get(0).CodeMirror.refresh();
+                }
+            });
 
-        observer.observe(textarea, {
+        configObserver.observe(textarea, {
             attributes: true
         });
+
+        if (uiField) {
+            uiObserver = new MutationObserver(function () {
+                if (uiField.style.display !== 'none') {
+                    $(textarea).siblings('.CodeMirror').get(0).CodeMirror.refresh();
+                }
+            });
+
+            uiObserver.observe(uiField, {
+                attributes: true
+            });
+        }
     }
 
     /**
@@ -196,7 +210,9 @@ define([
                 function () {
                     var visible = textarea.style.display !== 'none';
 
-                    if ($('textarea').closest('tr').css('display') === 'none') {
+                    if ($('textarea').closest('tr').css('display') === 'none' ||
+                        $('textarea').closest('.field, .admin__field').css('display') === 'none'
+                    ) {
                         visible = false;
                     }
 
