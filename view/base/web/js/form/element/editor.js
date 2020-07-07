@@ -2,7 +2,8 @@ define([
     'jquery',
     'underscore',
     'Magento_Ui/js/form/element/textarea',
-    '../../codemirror/lib/codemirror'
+    '../../codemirror/lib/codemirror',
+    '../../codemirror/addon/display/fullscreen'
 ], function ($, _, Textarea, CodeMirror) {
     'use strict';
 
@@ -157,9 +158,52 @@ define([
         document.getElementsByTagName('head')[0].appendChild(link);
     }
 
+    /**
+     * @param {Object} editor
+     * @param {Boolean} flag
+     */
+    function toggleFullscreenClassForParents(editor, flag) {
+        var parent = $(editor.getTextArea()),
+            tagName;
+
+        do {
+            if (flag) {
+                parent = parent.offsetParent();
+            } else {
+                parent = parent.closest('.cm-fullscreen-parent');
+            }
+
+            parent.toggleClass('cm-fullscreen-parent', flag);
+            tagName = parent.length ? parent.get(0).tagName.toLowerCase() : 'html';
+        } while (['html', 'body'].indexOf(tagName) === -1);
+    }
+
+    /**
+     * @param {Object} editor
+     */
+    function toggleFullscreen(editor, flag) {
+        if (flag === undefined) {
+            flag = !editor.getOption('fullScreen');
+        }
+
+        toggleFullscreenClassForParents(editor, flag);
+        editor.setOption('fullScreen', flag);
+        setTimeout(function () {
+            editor.refresh();
+        }, 500);
+    }
+
+    /**
+     * @param {Object} editor
+     */
+    function exitFullscreen(editor) {
+        toggleFullscreen(editor, false);
+    }
+
     // load CSS for codemirror editor
     _.each([
             'js/codemirror/lib/codemirror.css',
+            'js/codemirror/addon/display/fullscreen.css',
             'js/codemirror/addon/hint/show-hint.css',
             'js/codemirror/addon/fold/foldgutter.css',
             'css/editor.css'
@@ -180,7 +224,9 @@ define([
                 matchBrackets: true,
                 extraKeys: {
                     'Ctrl-Space': 'autocomplete',
-                    'Ctrl-J': 'toMatchingTag'
+                    'Ctrl-J': 'toMatchingTag',
+                    'F11': toggleFullscreen,
+                    'Esc': exitFullscreen
                 }
             }
         },
