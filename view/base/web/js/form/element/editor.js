@@ -218,6 +218,7 @@ define([
                 lineNumbers: true,
                 autoCloseBrackets: true,
                 autoCloseTags: true,
+                autoHeight: false,
                 matchTags: {
                     bothTags: true
                 },
@@ -266,6 +267,10 @@ define([
                         textarea,
                         self.editorConfig
                     );
+
+                    if (self.editorConfig.autoHeight) {
+                        self.editor.setSize(null, $(textarea).height());
+                    }
 
                     listenTextareaVisibilityChange(textarea);
 
