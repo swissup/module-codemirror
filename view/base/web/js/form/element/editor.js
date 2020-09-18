@@ -277,7 +277,10 @@ define([
                     $(textarea)
                         .attr('tabindex', -1) // prevent focus on invisible field
                         .addClass('cm-textarea-hidden') // fix for hidden config field when using `depends`
-                        .toggle(visible);
+                        .toggle(visible)
+                        .on('focus', function () {
+                            self.editor.focus();
+                        });
 
                     self.editor.on(
                         'changes',
