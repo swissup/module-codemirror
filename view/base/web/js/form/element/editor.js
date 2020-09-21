@@ -101,6 +101,18 @@ define([
 
     /**
      * @param {Node} textarea
+     * @return {?Object}
+     */
+    function getCodemirrorInstance(textarea) {
+        var node = $(textarea).siblings('.CodeMirror').get(0);
+
+        if (node && node.CodeMirror) {
+            return node.CodeMirror;
+        }
+    }
+
+    /**
+     * @param {Node} textarea
      */
     function listenTextareaVisibilityChange(textarea) {
         var uiField = $(textarea).closest('.field, .admin__field').get(0),
@@ -118,8 +130,8 @@ define([
                     }
                 }
 
-                if (textarea.style.display !== 'none') {
-                    $(textarea).siblings('.CodeMirror').get(0).CodeMirror.refresh();
+                if (textarea.style.display !== 'none' && getCodemirrorInstance(textarea)) {
+                    getCodemirrorInstance(textarea).refresh();
                 }
             });
 
@@ -129,8 +141,8 @@ define([
 
         if (uiField) {
             uiObserver = new MutationObserver(function () {
-                if (uiField.style.display !== 'none') {
-                    $(textarea).siblings('.CodeMirror').get(0).CodeMirror.refresh();
+                if (uiField.style.display !== 'none' && getCodemirrorInstance(textarea)) {
+                    getCodemirrorInstance(textarea).refresh();
                 }
             });
 
