@@ -1,10 +1,11 @@
 define([
     'jquery',
     'underscore',
+    'uiRegistry',
     'Magento_Ui/js/form/element/textarea',
     '../../codemirror/lib/codemirror',
     '../../codemirror/addon/display/fullscreen'
-], function ($, _, Textarea, CodeMirror) {
+], function ($, _, registry, Textarea, CodeMirror) {
     'use strict';
 
     var _isMinificationEnabled;
@@ -231,6 +232,7 @@ define([
                 autoCloseBrackets: true,
                 autoCloseTags: true,
                 autoHeight: false,
+                buttons: [],
                 matchTags: {
                     bothTags: true
                 },
@@ -260,6 +262,7 @@ define([
         initEditor: function (textarea) {
             var self = this,
                 mode = this.editorConfig.mode,
+                toolbar = this.createToolbar(),
                 modeName;
 
             // Require resource with repective mode. Init editor when ready.
@@ -286,6 +289,10 @@ define([
 
                     listenTextareaVisibilityChange(textarea);
 
+                    if (toolbar) {
+                        $(self.editor.display.wrapper).before(toolbar);
+                    }
+
                     $(textarea)
                         .attr('tabindex', -1) // prevent focus on invisible field
                         .addClass('cm-textarea-hidden') // fix for hidden config field when using `depends`
@@ -301,6 +308,31 @@ define([
                     makeResizable(self.editor);
                 }
             );
+        },
+
+        /**
+         * @return {*}
+         */
+        createToolbar: function () {
+            var self = this,
+                buttons = this.editorConfig.buttons,
+                toolbar = $('<div class="CodeMirror-toolbar"></div>');
+
+            if (!buttons || !buttons.length) {
+                return false;
+            }
+
+            _.each(buttons, function (buttonConfig) {
+                var button = $('<label>' + buttonConfig.label + '</label>');
+
+                registry.get(self.parentName + '.' + buttonConfig.target, function (element) {
+                    button.attr('for', element.uid);
+                });
+
+                toolbar.append(button.get(0));
+            });
+
+            return toolbar.get(0);
         },
 
         /**
