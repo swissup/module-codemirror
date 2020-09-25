@@ -1,3 +1,17 @@
+@-webkit-keyframes codemirror-rotate {
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes codemirror-rotate {
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+
 .CodeMirror {
     border: 1px solid #adadad;
     border-radius: 1px;
@@ -6,6 +20,38 @@
 
     &:hover {
         border-color: #878787;
+    }
+
+    &.loading {
+        position: relative;
+        pointer-events: none;
+
+        &:before {
+            content: '';
+            position: absolute;
+            z-index: 5;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: rgba(255,255,255,.7);
+        }
+        &:after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #5850ec;
+            border-top-color: transparent;
+            z-index: 6;
+            position: absolute;
+            left: 50%;
+            top: 40px;
+            margin-left: -10px;
+            -webkit-animation: codemirror-rotate 0.5s linear infinite;
+            animation: codemirror-rotate 0.5s linear infinite;
+        }
     }
 
     textarea[disabled] + & {

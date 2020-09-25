@@ -246,6 +246,13 @@ define([
             }
         },
 
+        /**
+         * @param {Boolean} flag
+         */
+        isLoading: function (flag) {
+            $(this.editor.getWrapperElement()).toggleClass('loading', flag);
+        },
+
         /** @inheritdoc */
         initObservable: function () {
             this._super();
