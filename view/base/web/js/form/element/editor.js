@@ -297,7 +297,7 @@ define([
                     listenTextareaVisibilityChange(textarea);
 
                     if (toolbar) {
-                        $(self.editor.display.wrapper).before(toolbar);
+                        $(self.editor.getWrapperElement()).before(toolbar);
                     }
 
                     $(textarea)
