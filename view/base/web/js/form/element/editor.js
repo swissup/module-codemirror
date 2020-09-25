@@ -283,7 +283,7 @@ define([
                         self.editorConfig
                     );
 
-                    if (self.editorConfig.autoHeight) {
+                    if (self.editorConfig.autoHeight && $(textarea).height() > 100) {
                         self.editor.setSize(null, $(textarea).height());
                     }
 
