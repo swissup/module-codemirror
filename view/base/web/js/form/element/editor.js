@@ -1,23 +1,21 @@
 define([
     'jquery',
     'underscore',
-    'uiRegistry',
     'Magento_Ui/js/form/element/textarea',
-    '../../codemirror/lib/codemirror',
-    '../../codemirror/addon/display/fullscreen'
-], function ($, _, registry, Textarea, CodeMirror) {
+    'Swissup_Codemirror/js/loadCss',
+    'Swissup_Codemirror/js/codemirror/lib/codemirror'
+], function ($, _, Textarea, loadCss, CodeMirror) {
     'use strict';
-
-    var _isMinificationEnabled;
 
     /**
      * Get array of required resources for CodeMirror mode.
      *
-     * @param  {String} modeName
+     * @param  {Object} editorConfig
      * @return {Array}
      */
-    function getRequired(modeName) {
+    function getRequired(editorConfig) {
         var files,
+            modeName = editorConfig.mode.name ? editorConfig.mode.name : editorConfig.mode,
             resourceMap = {
             'css|text/x-less': [
                 'addon/hint/show-hint',
@@ -47,176 +45,32 @@ define([
             return key.indexOf(modeName) >= 0;
         });
 
-        return typeof files === 'undefined' ?
-            [] :
-            _.map(files, function (path) {
-                return 'Swissup_Codemirror/js/codemirror/' + path;
-            });
-    }
-
-    /**
-     * Make editor resizable.
-     *
-     * @param  {CodeMirror} editor
-     */
-    function makeResizable(editor) {
-        var wrapperElement = editor.getWrapperElement();
-
-        $(wrapperElement).resizable({
-            handles: 's',
-            resize: _.debounce(editor.refresh.bind(editor), 100),
-            zIndex: 900
+        return _.map(files || [], function (path) {
+            return 'Swissup_Codemirror/js/codemirror/' + path;
         });
-        // Make full height on double click.
-        $('.ui-resizable-handle', wrapperElement)
-            .dblclick(function () {
-                editor.setSize(null, editor.doc.height + 12);
-                editor.refresh();
-            });
     }
 
     /**
-     * Is CSS minification enabled
-     *
-     * @param  {String}  minficationPostfix
-     * @return {Boolean}
+     * @param {Object} editorConfig
+     * @return {Array}
      */
-    function isMinificationEnabled(minficationPostfix) {
-        var url;
+    function getPluginNames(editorConfig) {
+        var plugins = [
+            'visibility',
+            'resizable',
+            'fullscreen'
+        ];
 
-        if (typeof _isMinificationEnabled === 'undefined') {
-            url = document.createElement('a');
-            url.href = require.toUrl('');
-            _isMinificationEnabled = true;
-            $('link[type="text/css"][href^="' + url.origin + '"]').each(function () {
-                if ($(this).attr('href').indexOf(minficationPostfix) < 0) {
-                    _isMinificationEnabled = false;
-
-                    return false;
-                }
-            });
+        if (editorConfig.buttons) {
+            plugins.push('toolbar');
         }
 
-        return _isMinificationEnabled;
-    }
-
-    /**
-     * @param {Node} textarea
-     * @return {?Object}
-     */
-    function getCodemirrorInstance(textarea) {
-        var node = $(textarea).siblings('.CodeMirror').get(0);
-
-        if (node && node.CodeMirror) {
-            return node.CodeMirror;
-        }
-    }
-
-    /**
-     * @param {Node} textarea
-     */
-    function listenTextareaVisibilityChange(textarea) {
-        var uiField = $(textarea).closest('.field, .admin__field').get(0),
-            uiObserver,
-            configObserver = new MutationObserver(function () {
-                var td;
-
-                if ($(textarea).closest('.section-config')) {
-                    td = $(textarea).closest('tr').find('td');
-
-                    if (textarea.style.display === 'none') {
-                        td.addClass('ignore-validate');
-                    } else {
-                        td.removeClass('ignore-validate');
-                    }
-                }
-
-                if (textarea.style.display !== 'none' && getCodemirrorInstance(textarea)) {
-                    getCodemirrorInstance(textarea).refresh();
-                }
-            });
-
-        configObserver.observe(textarea, {
-            attributes: true
-        });
-
-        if (uiField) {
-            uiObserver = new MutationObserver(function () {
-                if (uiField.style.display !== 'none' && getCodemirrorInstance(textarea)) {
-                    getCodemirrorInstance(textarea).refresh();
-                }
-            });
-
-            uiObserver.observe(uiField, {
-                attributes: true
-            });
-        }
-    }
-
-    /**
-     * Load Css via related URL
-     *
-     * @param  {String} url
-     */
-    function loadCss(url) {
-        var link = document.createElement('link');
-
-        if (isMinificationEnabled('.min.css')) {
-            url = url.replace('.css', '.min.css');
-        }
-
-        link.type = 'text/css';
-        link.rel = 'stylesheet';
-        link.href = require.toUrl('Swissup_Codemirror/' + url);
-        document.getElementsByTagName('head')[0].appendChild(link);
-    }
-
-    /**
-     * @param {Object} editor
-     * @param {Boolean} flag
-     */
-    function toggleFullscreenClassForParents(editor, flag) {
-        var parent = $(editor.getTextArea()),
-            tagName;
-
-        do {
-            if (flag) {
-                parent = parent.offsetParent();
-            } else {
-                parent = parent.closest('.cm-fullscreen-parent');
-            }
-
-            parent.toggleClass('cm-fullscreen-parent', flag);
-            tagName = parent.length ? parent.get(0).tagName.toLowerCase() : 'html';
-        } while (['html', 'body'].indexOf(tagName) === -1);
-    }
-
-    /**
-     * @param {Object} editor
-     */
-    function toggleFullscreen(editor, flag) {
-        if (flag === undefined) {
-            flag = !editor.getOption('fullScreen');
-        }
-
-        toggleFullscreenClassForParents(editor, flag);
-        editor.setOption('fullScreen', flag);
-        setTimeout(function () {
-            editor.refresh();
-        }, 500);
-    }
-
-    /**
-     * @param {Object} editor
-     */
-    function exitFullscreen(editor) {
-        toggleFullscreen(editor, false);
+        return plugins;
     }
 
     // load CSS for codemirror editor
     _.each([
             'js/codemirror/lib/codemirror.css',
-            'js/codemirror/addon/display/fullscreen.css',
             'js/codemirror/addon/hint/show-hint.css',
             'js/codemirror/addon/fold/foldgutter.css',
             'css/editor.css'
@@ -224,6 +78,7 @@ define([
 
     return Textarea.extend({
         defaults: {
+            plugins: {},
             elementTmpl: 'Swissup_Codemirror/form/element/editor',
             inputClass: '',
             editorConfig: {
@@ -239,9 +94,7 @@ define([
                 matchBrackets: true,
                 extraKeys: {
                     'Ctrl-Space': 'autocomplete',
-                    'Ctrl-J': 'toMatchingTag',
-                    'F11': toggleFullscreen,
-                    'Esc': exitFullscreen
+                    'Ctrl-J': 'toMatchingTag'
                 }
             }
         },
@@ -267,15 +120,10 @@ define([
          * @param  {Element} textarea
          */
         initEditor: function (textarea) {
-            var self = this,
-                mode = this.editorConfig.mode,
-                toolbar = this.createToolbar(),
-                modeName;
+            var self = this;
 
-            // Require resource with repective mode. Init editor when ready.
-            modeName = typeof mode === 'object' ? mode.name : mode;
             require(
-                getRequired(modeName), // Array of required resources
+                getRequired(this.editorConfig), // Array of required resources
                 function () {
                     var visible = textarea.style.display !== 'none';
 
@@ -294,12 +142,6 @@ define([
                         self.editor.setSize(null, $(textarea).height());
                     }
 
-                    listenTextareaVisibilityChange(textarea);
-
-                    if (toolbar) {
-                        $(self.editor.getWrapperElement()).before(toolbar);
-                    }
-
                     $(textarea)
                         .attr('tabindex', -1) // prevent focus on invisible field
                         .addClass('cm-textarea-hidden') // fix for hidden config field when using `depends`
@@ -312,34 +154,28 @@ define([
                         'changes',
                         self.listenEditorChanges.bind(self)
                     );
-                    makeResizable(self.editor);
+
+                    _.each(getPluginNames(self.editorConfig), function (name) {
+                        self.plugin(name);
+                    });
                 }
             );
         },
 
         /**
-         * @return {*}
+         * Initialize component plugin if needed and return its instance
          */
-        createToolbar: function () {
+        plugin: function (name) {
             var self = this,
-                buttons = this.editorConfig.buttons,
-                toolbar = $('<div class="CodeMirror-toolbar"></div>');
+                path = 'Swissup_Codemirror/js/form/element/editor-plugins/';
 
-            if (!buttons || !buttons.length) {
-                return false;
+            if (!self.plugins[name]) {
+                require([path + name], function (Plugin) {
+                    self.plugins[name] = new Plugin(self);
+                });
             }
 
-            _.each(buttons, function (buttonConfig) {
-                var button = $('<label>' + buttonConfig.label + '</label>');
-
-                registry.get(self.parentName + '.' + buttonConfig.target, function (element) {
-                    button.attr('for', element.uid);
-                });
-
-                toolbar.append(button.get(0));
-            });
-
-            return toolbar.get(0);
+            return self.plugins[name];
         },
 
         /**
