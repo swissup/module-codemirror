@@ -12,7 +12,7 @@ define([
      * @param {Boolean} flag
      */
     function toggleFullscreenClassForParents(editor, flag) {
-        var parent = $(editor.getTextArea()),
+        var parent = $(editor.getWrapperElement()),
             tagName;
 
         do {
