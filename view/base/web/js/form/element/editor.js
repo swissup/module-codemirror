@@ -212,6 +212,18 @@ define([
             }
 
             return this;
+        },
+
+        /**
+         * Destroys current instance along with all of its' children.
+         * @param {Boolean} skipUpdate - skip collection update when element to be destroyed.
+         */
+        destroy: function (skipUpdate) {
+            if (this.editor) {
+                this.editor.toTextArea();
+            }
+
+            return this._super(skipUpdate);
         }
     });
 });
