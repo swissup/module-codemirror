@@ -163,19 +163,25 @@ define([
         },
 
         /**
-         * Initialize component plugin if needed and return its instance
+         * Initialize component plugin if needed, and return its instance via promise
+         *
+         * @return {$.Deferred}
          */
         plugin: function (name) {
             var self = this,
+                deferred = $.Deferred(),
                 path = 'Swissup_Codemirror/js/form/element/editor-plugins/';
 
             if (!self.plugins[name]) {
                 require([path + name], function (Plugin) {
                     self.plugins[name] = new Plugin(self);
+                    deferred.resolve(self.plugins[name]);
                 });
+            } else {
+                deferred.resolve(self.plugins[name]);
             }
 
-            return self.plugins[name];
+            return deferred;
         },
 
         /**
