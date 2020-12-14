@@ -173,12 +173,16 @@ define([
                 path = 'Swissup_Codemirror/js/form/element/editor-plugins/';
 
             if (!self.plugins[name]) {
+                self.plugins[name] = {
+                    instance: null
+                };
+
                 require([path + name], function (Plugin) {
-                    self.plugins[name] = new Plugin(self);
-                    deferred.resolve(self.plugins[name]);
+                    self.plugins[name].instance = new Plugin(self);
+                    deferred.resolve(self.plugins[name].instance);
                 });
-            } else {
-                deferred.resolve(self.plugins[name]);
+            } else if (self.plugins[name].instance) {
+                deferred.resolve(self.plugins[name].instance);
             }
 
             return deferred;
