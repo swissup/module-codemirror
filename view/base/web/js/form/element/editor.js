@@ -61,7 +61,7 @@ define([
             'fullscreen'
         ];
 
-        if (editorConfig.buttons) {
+        if (editorConfig.buttons.length) {
             plugins.push('toolbar');
         }
 
