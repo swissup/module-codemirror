@@ -169,23 +169,23 @@ define([
          */
         plugin: function (name) {
             var self = this,
-                deferred = $.Deferred(),
                 path = 'Swissup_Codemirror/js/form/element/editor-plugins/';
 
             if (!self.plugins[name]) {
                 self.plugins[name] = {
-                    instance: null
+                    instance: null,
+                    deferred: $.Deferred()
                 };
 
                 require([path + name], function (Plugin) {
                     self.plugins[name].instance = new Plugin(self);
-                    deferred.resolve(self.plugins[name].instance);
+                    self.plugins[name].deferred.resolve(self.plugins[name].instance);
                 });
             } else if (self.plugins[name].instance) {
-                deferred.resolve(self.plugins[name].instance);
+                self.plugins[name].deferred.resolve(self.plugins[name].instance);
             }
 
-            return deferred;
+            return self.plugins[name].deferred;
         },
 
         /**
