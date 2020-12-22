@@ -84,6 +84,10 @@ Example:
                     <label>LESS</label>
                     <frontend_model>Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Less</frontend_model>
                 </field>
+                <field id="scss" translate="label" type="textarea" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SCSS</label>
+                    <frontend_model>Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Scss</frontend_model>
+                </field>
                 <field id="js" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>JS</label>
                     <frontend_model>Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Javascript</frontend_model>
@@ -102,10 +106,11 @@ Example:
 </config>
 ```
 
-There are 5 frontend model for system config:
+There are 7 frontend models for system config:
 
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Css**
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Less**
+ -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Scss**
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Javascript**
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Htmlmixed**
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Inlinecss**

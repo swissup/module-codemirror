@@ -17,7 +17,7 @@ define([
         var files,
             modeName = editorConfig.mode.name ? editorConfig.mode.name : editorConfig.mode,
             resourceMap = {
-            'css|text/x-less': [
+            'css|text/x-less|text/x-scss': [
                 'addon/hint/show-hint',
                 'addon/hint/css-hint',
                 'addon/edit/closebrackets',
