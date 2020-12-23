@@ -97,25 +97,6 @@ define([
             });
         });
 
-        component.plugin('toolbar').then(function (toolbar) {
-            var useWidget = _.find(component.editorConfig.directives, function (directive) {
-                    return directive.type === 'widget';
-                });
-
-            if (useWidget) {
-                toolbar.addButton({
-                    label: $t('Insert Widget'),
-
-                    /**
-                     * Show insert widget popup
-                     */
-                    handler: function () {
-                        console.log('asd');
-                    }
-                });
-            }
-        });
-
         /**
          * @return {Array}
          */
