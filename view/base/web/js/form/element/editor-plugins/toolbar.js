@@ -1,7 +1,7 @@
 define([
     'jquery',
-    'uiRegistry'
-], function ($, registry) {
+    './utils/item-builder'
+], function ($, builder) {
     'use strict';
 
     return function (component) {
@@ -13,23 +13,7 @@ define([
          * @param {Object} buttonConfig
          */
         function addButton(buttonConfig) {
-            var button = $('<label>' + buttonConfig.label + '</label>');
-
-            if (buttonConfig.class) {
-                button.addClass(buttonConfig.class);
-            }
-
-            if (buttonConfig.title) {
-                button.attr('title', buttonConfig.title);
-            }
-
-            if (buttonConfig.target) {
-                registry.get(component.parentName + '.' + buttonConfig.target, function (element) {
-                    button.attr('for', element.uid);
-                });
-            } else if (buttonConfig.handler) {
-                button.click(buttonConfig.handler);
-            }
+            var button = builder.build(buttonConfig, component);
 
             toolbar.append(button.get(0));
 

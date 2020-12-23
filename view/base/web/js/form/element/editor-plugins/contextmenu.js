@@ -1,7 +1,7 @@
 define([
     'jquery',
-    'uiRegistry'
-], function ($, registry) {
+    './utils/item-builder'
+], function ($, builder) {
     'use strict';
 
     return function (component) {
@@ -14,27 +14,7 @@ define([
          * @param {Object} itemConfig
          */
         function addItem(itemConfig) {
-            var item = $('<label>' + itemConfig.label + '</label>');
-
-            if (itemConfig.icon) {
-                item.prepend('<span class="cm-icon">' + itemConfig.icon + '</span>');
-            }
-
-            if (itemConfig.class) {
-                item.addClass(itemConfig.class);
-            }
-
-            if (itemConfig.title) {
-                item.attr('title', itemConfig.title);
-            }
-
-            if (itemConfig.target) {
-                registry.get(component.parentName + '.' + itemConfig.target, function (element) {
-                    item.attr('for', element.uid);
-                });
-            } else if (itemConfig.handler) {
-                item.click(itemConfig.handler);
-            }
+            var item = builder.build(itemConfig, component);
 
             menu.append(item.get(0));
 
@@ -42,7 +22,13 @@ define([
         }
 
         $.each(component.editorConfig.contextmenu || [], function () {
-            addItem(this);
+            if (this.config) {
+                require([this.config], function (itemConfig) {
+                    addItem(itemConfig);
+                });
+            } else {
+                addItem(this);
+            }
         });
 
         cm.on('contextmenu', function (instance, event) {
