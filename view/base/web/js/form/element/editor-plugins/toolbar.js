@@ -37,7 +37,13 @@ define([
         }
 
         $.each(component.editorConfig.buttons || [], function () {
-            addButton(this);
+            if (this.config) {
+                require([this.config], function (buttonConfig) {
+                    addButton(buttonConfig);
+                });
+            } else {
+                addButton(this);
+            }
         });
 
         return {
