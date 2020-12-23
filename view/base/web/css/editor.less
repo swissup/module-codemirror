@@ -93,30 +93,64 @@
         }
     }
 
-    &-toolbar label {
-        text-shadow: none;
-        box-shadow: none;
+    &-toolbar {
+        display: flex;
+
+        label {
+            display: flex;
+            align-items: center;
+            text-shadow: none;
+            box-shadow: none;
+            line-height: normal;
+            cursor: pointer;
+            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: .9em;
+            font-weight: normal;
+            border-radius: 1px;
+            border: 1px solid #adadad;
+            background: #f4f4f4;
+            color: #333;
+            padding: 5px 10px;
+            margin: 0 4px 4px 0;
+
+            &.icon {
+                padding: 0 10px;
+            }
+
+            > svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            &:hover {
+                background: #fafafa;
+            }
+
+            &:before,
+            &:after {
+                display: none;
+            }
+        }
+    }
+
+    .CodeMirror-widget {
         display: inline-block;
-        line-height: normal;
-        cursor: pointer;
-        user-select: none;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        border: 1px solid #ddd;
+        background: #f6f6f6;
+        padding: 1px 3px;
         font-size: .9em;
-        font-weight: normal;
-        border-radius: 1px;
-        border: 1px solid #adadad;
-        background: #f4f4f4;
-        color: #333;
-        padding: 5px 10px;
-        margin: 0 4px 4px 0;
+        cursor: default;
+        max-width: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+        opacity: .5; // to make user selection visible
 
         &:hover {
-            background: #fafafa;
-        }
-
-        &:before,
-        &:after {
-            display: none;
+            opacity: .7;
+            border-color: #ccc;
         }
     }
 }

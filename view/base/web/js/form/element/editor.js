@@ -65,6 +65,10 @@ define([
             plugins.push('toolbar');
         }
 
+        if (editorConfig.directives.length) {
+            plugins.push('directives');
+        }
+
         return plugins;
     }
 
@@ -88,6 +92,7 @@ define([
                 autoCloseTags: true,
                 autoHeight: false,
                 buttons: [],
+                directives: [],
                 matchTags: {
                     bothTags: true
                 },
