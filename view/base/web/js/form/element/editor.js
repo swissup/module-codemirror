@@ -234,6 +234,12 @@ define([
          * @param {Boolean} skipUpdate - skip collection update when element to be destroyed.
          */
         destroy: function (skipUpdate) {
+            _.each(this.plugins, function (plugin) {
+                if (plugin.instance && plugin.instance.destroy) {
+                    plugin.instance.destroy();
+                }
+            });
+
             if (this.editor) {
                 this.editor.toTextArea();
             }

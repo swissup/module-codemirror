@@ -60,7 +60,14 @@ define([
         });
 
         return {
-            addItem: addItem
+            addItem: addItem,
+
+            /**
+             * [destroy description]
+             */
+            destroy: function () {
+                menu.remove();
+            }
         };
     };
 });

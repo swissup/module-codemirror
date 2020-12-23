@@ -41,7 +41,14 @@ define([
         });
 
         return {
-            addButton: addButton
+            addButton: addButton,
+
+            /**
+             * [destroy description]
+             */
+            destroy: function () {
+                toolbar.remove();
+            }
         };
     };
 });
