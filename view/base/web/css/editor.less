@@ -134,6 +134,66 @@
         }
     }
 
+    &-menu {
+        position: absolute;
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        width: 180px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 3px;
+        background: #fff;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);
+
+        transition: 200ms opacity linear;
+
+        &.shown {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        label {
+            padding: 8px 10px 8px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            &:first-child {
+                border-top-right-radius: 3px;
+                border-top-left-radius: 3px;
+            }
+            &:last-child {
+                border-bottom-right-radius: 3px;
+                border-bottom-left-radius: 3px;
+            }
+
+            &:hover {
+                background: #fdfdfd;
+            }
+
+            .cm-icon {
+                display: flex;
+                align-items: center;
+                flex-shrink: 0;
+                flex-grow: 0;
+                opacity: .05;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            &.active {
+                .cm-icon {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
     .CodeMirror-widget {
         display: inline-block;
         border: 1px solid #ddd;
