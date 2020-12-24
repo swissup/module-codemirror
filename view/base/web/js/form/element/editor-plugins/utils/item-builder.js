@@ -24,6 +24,8 @@ define([
                 item.attr('title', config.title);
             }
 
+            item.data('component', cmp);
+
             if (config.target) {
                 registry.get(cmp.parentName + '.' + config.target, function (element) {
                     item.attr('for', element.uid);
