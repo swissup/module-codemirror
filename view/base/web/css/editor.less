@@ -140,6 +140,8 @@
         opacity: 0;
         pointer-events: none;
         width: 180px;
+        height: 0;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         border-radius: 3px;
@@ -151,6 +153,8 @@
         &.shown {
             opacity: 1;
             pointer-events: all;
+            height: auto;
+            overflow: visible;
         }
 
         label {
