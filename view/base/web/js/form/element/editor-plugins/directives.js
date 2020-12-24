@@ -11,7 +11,7 @@ define([
         builtInDirectives = {};
 
     builtInDirectives.widget = {
-        re: '{{(widget type|block class)=["\'](?<label>.*?)["\'].*?}}',
+        re: '{{(widget type|block class|block id)=["\'](?<label>.*?)["\'].*?}}',
 
         /**
          * @param {Object} match
