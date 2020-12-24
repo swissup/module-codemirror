@@ -42,6 +42,18 @@ define([
         }
     };
 
+    builtInDirectives.url = {
+        re: '{{(store url|store direct_url|media url|view url)=["\'](?<label>.*?)["\'].*?}}',
+
+        /**
+         * @param {Object} match
+         * @return {String}
+         */
+        placeholder: function (match) {
+            return '<span>' + match.groups.label + '</span>';
+        }
+    };
+
     return function (component) {
         var status = ko.observable(),
             cm = component.editor;
