@@ -92,6 +92,14 @@ Example:
                     <label>JS</label>
                     <frontend_model>Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Javascript</frontend_model>
                 </field>
+                <field id="yaml" translate="label" type="textarea" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>YAML</label>
+                    <frontend_model>Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Yaml</frontend_model>
+                </field>
+                <field id="yaml-frontmatter" translate="label" type="textarea" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>YAML Frontmatter</label>
+                    <frontend_model>Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Yamlfrontmatter</frontend_model>
+                </field>
                 <field id="text" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Label Text</label>
                     <frontend_model>Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Htmlmixed</frontend_model>
@@ -106,7 +114,7 @@ Example:
 </config>
 ```
 
-There are 7 frontend models for system config:
+There are 9 frontend models for system config:
 
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Css**
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Less**
@@ -115,3 +123,5 @@ There are 7 frontend models for system config:
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Htmlmixed**
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Inlinecss**
  -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Json**
+ -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Yaml**
+ -  Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\\**Yamlfrontmatter**

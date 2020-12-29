@@ -77,4 +77,24 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Yaml" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="editor_config" xsi:type="array">
+                    <item name="mode" xsi:type="string">yaml</item>
+                    <item name="line_wrapping" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Yamlfrontmatter" type="Swissup\Codemirror\Block\Adminhtml\System\Config\Form\Field\Editor">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="editor_config" xsi:type="array">
+                    <item name="mode" xsi:type="string">yaml-frontmatter</item>
+                    <item name="line_wrapping" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>
