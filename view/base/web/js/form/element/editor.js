@@ -38,7 +38,13 @@ define([
                 'addon/edit/closebrackets',
                 'addon/edit/matchbrackets',
                 'mode/javascript/javascript'
-            ]
+            ],
+            'yaml|text/x-yaml': [
+                'mode/yaml/yaml'
+            ],
+            'yaml-frontmatter': [
+                'mode/yaml-frontmatter/yaml-frontmatter'
+            ],
         };
 
         files = _.find(resourceMap, function (value, key) {
