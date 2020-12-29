@@ -40,9 +40,15 @@ define([
                 'mode/javascript/javascript'
             ],
             'yaml|text/x-yaml': [
+                'addon/fold/foldgutter',
+                'addon/fold/foldcode',
+                'addon/fold/indent-fold',
                 'mode/yaml/yaml'
             ],
             'yaml-frontmatter': [
+                'addon/fold/foldgutter',
+                'addon/fold/foldgutter',
+                'addon/fold/indent-fold',
                 'mode/yaml-frontmatter/yaml-frontmatter'
             ],
         };
