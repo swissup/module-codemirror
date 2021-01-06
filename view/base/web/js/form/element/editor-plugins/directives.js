@@ -11,7 +11,7 @@ define([
         builtInDirectives = {};
 
     builtInDirectives.widget = {
-        re: '{{(widget type|block class|block id)=["\'](?<label>.*?)["\'].*?}}',
+        re: '{{(widget type|block class|block id)=["\'](?<label>.+?)["\'].*?}}',
 
         /**
          * @param {Object} match
@@ -31,7 +31,7 @@ define([
     };
 
     builtInDirectives.config = {
-        re: '{{config path=["\'](?<label>.*?)["\'].*?}}',
+        re: '{{config path=["\'](?<label>.+?)["\'].*?}}',
 
         /**
          * @param {Object} match
@@ -43,7 +43,7 @@ define([
     };
 
     builtInDirectives.url = {
-        re: '{{(store url|store direct_url|media url|view url)=["\'](?<label>.*?)["\'].*?}}',
+        re: '{{(store url|store direct_url|media url|view url)=["\'](?<label>.+?)["\'].*?}}',
 
         /**
          * @param {Object} match
