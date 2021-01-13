@@ -73,13 +73,25 @@ define([
             'fullscreen'
         ];
 
-        if (editorConfig.buttons.length) {
-            plugins.push('toolbar');
-        }
+        _.some(editorConfig.buttons, function (button) {
+            if (_.isEmpty(button) || button.enabled === false) {
+                return false;
+            }
 
-        if (editorConfig.directives.length) {
+            plugins.push('toolbar');
+
+            return true;
+        });
+
+        _.some(editorConfig.directives, function (directive) {
+            if (_.isEmpty(directive) || directive.enabled === false) {
+                return false;
+            }
+
             plugins.push('directives');
-        }
+
+            return true;
+        });
 
         return plugins;
     }

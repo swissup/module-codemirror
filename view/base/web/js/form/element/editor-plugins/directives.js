@@ -116,6 +116,10 @@ define([
             var directives = [];
 
             _.each(component.editorConfig.directives, function (directive) {
+                if (directive.enabled === false) {
+                    return;
+                }
+
                 if (!directive.type) {
                     directives.push(directive);
                 } else if (builtInDirectives[directive.type]) {

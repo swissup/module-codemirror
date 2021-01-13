@@ -21,6 +21,10 @@ define([
         }
 
         $.each(component.editorConfig.buttons || [], function () {
+            if (this.enabled === false) {
+                return;
+            }
+
             if (this.config) {
                 require([this.config], function (buttonConfig) {
                     addButton(buttonConfig);
