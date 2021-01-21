@@ -26,9 +26,11 @@ define([
                     return;
                 }
 
-                _isMinificationEnabled = href.indexOf(minficationPostfix) > 0;
+                if (href.indexOf(minficationPostfix) < 0) {
+                    _isMinificationEnabled = false;
 
-                return false;
+                    return false;
+                }
             });
         }
 
