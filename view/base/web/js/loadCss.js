@@ -19,11 +19,16 @@ define([
             url.href = require.toUrl('');
             _isMinificationEnabled = true;
             $('link[type="text/css"][href^="' + url.origin + '"]').each(function () {
-                if ($(this).attr('href').indexOf(minficationPostfix) < 0) {
-                    _isMinificationEnabled = false;
+                var href = $(this).attr('href'),
+                    deployed = href.indexOf('/_cache/merged/') > 0 || href.match(/[a-z]{2}_[A-Z]{2}/);
 
-                    return false;
+                if (!deployed) {
+                    return;
                 }
+
+                _isMinificationEnabled = href.indexOf(minficationPostfix) > 0;
+
+                return false;
             });
         }
 
