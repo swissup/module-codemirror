@@ -8,6 +8,7 @@
                 <item name="editor_config" xsi:type="array">
                     <item name="mode" xsi:type="string">css</item>
                     <item name="line_wrapping" xsi:type="boolean">true</item>
+                    <item name="css_class" xsi:type="string">cm-break-word</item>
                 </item>
             </argument>
         </arguments>
@@ -18,6 +19,7 @@
                 <item name="editor_config" xsi:type="array">
                     <item name="mode" xsi:type="string">text/x-less</item>
                     <item name="line_wrapping" xsi:type="boolean">true</item>
+                    <item name="css_class" xsi:type="string">cm-break-word</item>
                 </item>
             </argument>
         </arguments>
@@ -28,6 +30,7 @@
                 <item name="editor_config" xsi:type="array">
                     <item name="mode" xsi:type="string">text/x-scss</item>
                     <item name="line_wrapping" xsi:type="boolean">true</item>
+                    <item name="css_class" xsi:type="string">cm-break-word</item>
                 </item>
             </argument>
         </arguments>
@@ -41,6 +44,7 @@
                         <item name="inline" xsi:type="boolean">true</item>
                     </item>
                     <item name="line_wrapping" xsi:type="boolean">true</item>
+                    <item name="css_class" xsi:type="string">cm-break-word</item>
                 </item>
             </argument>
         </arguments>
@@ -52,6 +56,7 @@
                 <item name="editor_config" xsi:type="array">
                     <item name="mode" xsi:type="string">htmlmixed</item>
                     <item name="line_wrapping" xsi:type="boolean">true</item>
+                    <item name="css_class" xsi:type="string">cm-break-word</item>
                 </item>
             </argument>
         </arguments>
@@ -63,6 +68,7 @@
                 <item name="editor_config" xsi:type="array">
                     <item name="mode" xsi:type="string">javascript</item>
                     <item name="line_wrapping" xsi:type="boolean">true</item>
+                    <item name="css_class" xsi:type="string">cm-break-word</item>
                 </item>
             </argument>
         </arguments>
@@ -73,6 +79,7 @@
                 <item name="editor_config" xsi:type="array">
                     <item name="mode" xsi:type="string">application/ld+json</item>
                     <item name="line_wrapping" xsi:type="boolean">true</item>
+                    <item name="css_class" xsi:type="string">cm-break-word</item>
                 </item>
             </argument>
         </arguments>
@@ -83,6 +90,7 @@
                 <item name="editor_config" xsi:type="array">
                     <item name="mode" xsi:type="string">yaml</item>
                     <item name="line_wrapping" xsi:type="boolean">true</item>
+                    <item name="css_class" xsi:type="string">cm-break-word</item>
                 </item>
             </argument>
         </arguments>
@@ -93,6 +101,7 @@
                 <item name="editor_config" xsi:type="array">
                     <item name="mode" xsi:type="string">yaml-frontmatter</item>
                     <item name="line_wrapping" xsi:type="boolean">true</item>
+                    <item name="css_class" xsi:type="string">cm-break-word</item>
                 </item>
             </argument>
         </arguments>
