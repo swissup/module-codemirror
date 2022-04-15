@@ -16,7 +16,7 @@ define([
 
         // Make full height on double click.
         $('.ui-resizable-handle', wrapperElement)
-            .dblclick(function () {
+            .on('dblclick', function () {
                 editor.setSize(null, editor.doc.height + 12);
                 editor.refresh();
             });

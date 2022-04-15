@@ -31,7 +31,7 @@ define([
                     item.attr('for', element.uid);
                 });
             } else if (config.handler) {
-                item.click(config.handler);
+                item.on('click', config.handler);
             }
 
             return item;

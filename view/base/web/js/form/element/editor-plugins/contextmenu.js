@@ -41,7 +41,7 @@ define([
                 });
         });
 
-        $(document.body).click(function () {
+        $(document.body).on('click', function () {
             menu.removeClass('shown');
         });
 
