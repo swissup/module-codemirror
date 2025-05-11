@@ -23,7 +23,7 @@ define([
 
     // Fix for "Insert Image" button
     $(document.body).on('mediabrowsercreate', function (event) {
-        var browser = $(event.target).data('mediabrowser');
+        var browser = $(event.target).data('mageMediabrowser') || $(event.target).data('mediabrowser');
 
         if (browser) {
             browser.insertAtCursor = wrapper.wrap(browser.insertAtCursor, insertContentMixin);
