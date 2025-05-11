@@ -1,12 +1,11 @@
-/* global MediabrowserUtility, widgetTools, MagentovariablePlugin */
 define([
     'jquery',
-    'Swissup_Codemirror/js/form/element/editor',
-    'Swissup_Codemirror/js/codemirror/lib/codemirror',
+    'Magento_PageBuilder/js/form/element/html-code',
+    'Swissup_Codemirror/js/form/element/codemirror-strategy',
     'mage/utils/wrapper',
     'mage/adminhtml/browser',
     'mage/adminhtml/wysiwyg/widget'
-], function ($, Editor, CodeMirror, wrapper) {
+], function ($, HtmlCode, strategy, wrapper) {
     'use strict';
 
     var insertContentMixin = function (o, textarea, content) {
@@ -31,37 +30,9 @@ define([
         }
     });
 
-    return Editor.extend({
+    return HtmlCode.extend($.extend(true, {}, strategy, {
         defaults: {
             elementTmpl: 'Swissup_Codemirror/pagebuilder/editor'
-        },
-
-        /**
-         * Click event for Insert Widget Button
-         */
-        clickInsertWidget: function () {
-            return widgetTools.openDialog(
-                this.widgetUrl.replace('HTML_ID_PLACEHOLDER', this.uid)
-            );
-        },
-
-        /**
-         * Click event for Insert Image Button
-         */
-        clickInsertImage: function () {
-            return MediabrowserUtility.openDialog(
-                this.imageUrl.replace('HTML_ID_PLACEHOLDER', this.uid)
-            );
-        },
-
-        /**
-         * Click event for Insert Variable Button
-         */
-        clickInsertVariable: function () {
-            return MagentovariablePlugin.loadChooser(
-                this.variableUrl,
-                this.uid
-            );
         }
-    });
+    }));
 });
