@@ -177,6 +177,8 @@ define([
                     _.each(getPluginNames(self.editorConfig), function (name) {
                         self.plugin(name);
                     });
+
+                    $(textarea).trigger('codemirror:initialized', self.editor);
                 }
             );
         },
