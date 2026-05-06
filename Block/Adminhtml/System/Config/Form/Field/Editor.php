@@ -39,31 +39,25 @@ class Editor extends Field
         $this->jsLayout = [
             'components' => [
                 $scope => [
-                    'component' => 'uiComponent',
-                    'children' => [
-                        $scope => [
-                            'dataScope' => $name,
-                            'value' => $value,
-                            'disabled' => $isDisabled,
-                            'config' => [
-                                'component' => 'Swissup_Codemirror/js/form/element/editor',
-                                'template' => 'ui/form/field',
-                                'dataType' => 'text',
-                                'visible' => true,
-                                'formElement' => 'textarea',
-                                'labelVisible' => false,
-                                'inputId' => $element->getHtmlId(),
-                                'inputClass' => $this->getElement()->getClass(),
-                                'additionalClasses' => $this->getData('editor_config/css_class'),
-                                'editorConfig' => [
-                                    'mode' => $this->getMode(),
-                                    'readOnly' => $isDisabled ? 'nocursor' : false,
-                                    'lineWrapping' => $this->isLineWrapping()
-                                ]
-                            ]
+                    'dataScope' => $name,
+                    'value' => $value,
+                    'disabled' => $isDisabled,
+                    'config' => [
+                        'component' => 'Swissup_Codemirror/js/form/element/editor',
+                        'template' => 'ui/form/field',
+                        'dataType' => 'text',
+                        'visible' => true,
+                        'formElement' => 'textarea',
+                        'labelVisible' => false,
+                        'inputId' => $element->getHtmlId(),
+                        'inputClass' => $this->getElement()->getClass(),
+                        'additionalClasses' => $this->getData('editor_config/css_class'),
+                        'editorConfig' => [
+                            'mode' => $this->getMode(),
+                            'readOnly' => $isDisabled ? 'nocursor' : false,
+                            'lineWrapping' => $this->isLineWrapping()
                         ]
                     ]
-
                 ]
             ]
         ];
