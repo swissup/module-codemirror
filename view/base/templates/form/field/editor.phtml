@@ -6,10 +6,8 @@
     }
 }
 </script>
-<div class="admin__field-control control">
-<!-- ko scope: '<?= /* @noEscape */ $block->getScope() ?>' -->
+<div class="admin__field-control control" data-bind="scope: '<?= /* @noEscape */ $block->getScope() ?>'">
     <!-- ko if: hasTemplate() -->
         <!-- ko template: getTemplate() --><!-- /ko -->
     <!-- /ko -->
-<!-- /ko -->
 </div>
